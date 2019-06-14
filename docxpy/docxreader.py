@@ -47,8 +47,8 @@ def qn(tag):
 
 class DOCReader(object):
     def __init__(self, docx, img_dir=None):
-        if not os.path.exists(docx):
-            raise Exception('Can not file document: %s' % docx)
+        #if not os.path.exists(docx):
+            #raise Exception('Can not file document: %s' % docx)
         self.file = docx
         self.img_dir = img_dir
         self.data = {'links': []}  # save header, footer, document, links
