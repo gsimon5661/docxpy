@@ -6,7 +6,8 @@ import zipfile
 import os
 import sys
 import re
-
+import io
+from io import BytesIO
 
 def process_args():
     parser = argparse.ArgumentParser(description='A pure python-based utility '
@@ -47,8 +48,10 @@ def qn(tag):
 
 class DOCReader(object):
     def __init__(self, docx, img_dir=None):
-        #if not os.path.exists(docx):
-            #raise Exception('Can not file document: %s' % docx)
+        print(type(io.IOBase()))
+        if not isinstance(docx, BytesIO) and not os.path.isfile(docx):
+            raise Exception
+
         self.file = docx
         self.img_dir = img_dir
         self.data = {'links': []}  # save header, footer, document, links
@@ -136,5 +139,6 @@ def process(docx, img_dir=None):
 
 if __name__ == '__main__':
     args = process_args()
+    print(args)
     text = process(args.docx, args.img_dir)
     print(text.encode('utf-8'))
